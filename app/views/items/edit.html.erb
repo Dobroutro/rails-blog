@@ -1,0 +1,54 @@
+<div class="col-lg-10 col-lg-offset-1">
+  <h1>Editing blog post</h1>
+  <span>&nbsp;</span>
+  <%= link_to 'Back', items_path %>
+  <span>&nbsp;</span>
+  <%= form_for :item, url: item_path(@item), method: :patch do |f| %>
+
+    <div class="form-group">
+      <% if @item.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@item.errors.count, "error") %> prohibited
+            this blog entry from being saved:
+          </h2>
+          <ul>
+            <% @item.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :heading %>
+      <%= f.text_field :heading,  class: 'form-control' %>
+    </div>
+   
+    <div class="form-group">
+      <%= f.label :body %>
+      <%= f.text_area :body, rows: 15 ,  class: 'form-control' %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :image %>
+      <%= f.file_field :image ,  class: 'form-control' %>
+    </div>
+
+    <% if @item.image? %>
+      <div class="form-group">
+        <%= f.label :remove_image %>
+        <%= f.check_box :remove_image %>        
+      </div>
+      <div class="form-group">
+        <%= image_tag @item.image.thumb.url , :class => 'img-thumbnail' %>      
+      </div>
+    <% end %>   
+
+    <div class="form-group">
+      <%= f.submit  'Save', :class => 'btn btn-primary btn' %>
+    </div>
+   
+  <% end %>
+</div>

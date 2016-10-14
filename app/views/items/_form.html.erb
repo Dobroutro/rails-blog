@@ -1,0 +1,33 @@
+<%= form_for :item, url: items_path do |f| %>
+  <div class="form-group">
+    <% if @item.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@item.errors.count, "error") %> prohibited
+          this blog entry from being saved:
+        </h2>
+        <ul>
+          <% @item.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :heading %><br>
+    <%= f.text_field :heading,  class: 'form-control' %>
+  </div>
+ 
+  <div class="form-group">
+    <%= f.label :body %><br>
+    <%= f.text_area :body, rows: 15 ,  class: 'form-control'  %>
+  </div>
+  <div class="form-group">
+    <%= f.label :image %><br>
+    <%= f.file_field :image, class: 'form-control'  %>
+  </div>
+  <div class="form-group">
+    <%= f.submit %>
+  </div>
+<% end %>

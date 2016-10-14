@@ -1,0 +1,30 @@
+<%= link_to 'Back', items_path %>
+
+<p>
+  <strong>Heading:</strong>
+  <%= @item.heading %>
+</p>
+ 
+<p>
+  <strong>Body:</strong>
+  <%= @item.body %>
+</p>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @item.image.thumb.url %>
+</p> 
+
+
+<h2>Tags</h2>
+<%= render @item.tags %>
+
+<h2>Add a tag:</h2>
+<%= form_for([@item, @item.tags.build]) do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p> 
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
