@@ -7,9 +7,9 @@ class TagsController < ApplicationController
     @checktag = Tag.where(name: params[:tag][:name]).first()
 
     if(@checktag)    
-      @itemtag_check = Items_tag.where("item_id = ? AND tag_id = ?", @item.id, @checktag.id).first()      
+      @itemtag_check = ItemsTag.where("item_id = ? AND tag_id = ?", @item.id, @checktag.id).first()      
       unless(@itemtag_check)
-        @itemtag = Items_tag.new(item_id: @item.id, tag_id: @checktag.id)
+        @itemtag = ItemsTag.new(item_id: @item.id, tag_id: @checktag.id)
         @itemtag.save()        
       end      
     else 
@@ -22,10 +22,10 @@ class TagsController < ApplicationController
   def destroy
     
     @item = Item.find(params[:item_id])
-    @itemtag = Items_tag.where("item_id = ? AND tag_id = ?", params[:item_id], params[:id]).first()
+    @itemtag = ItemsTag.where("item_id = ? AND tag_id = ?", params[:item_id], params[:id]).first()
     @itemtag.destroy
 
-    @itemtag_check = Items_tag.where(tag_id: params[:id]).first()
+    @itemtag_check = ItemsTag.where(tag_id: params[:id]).first()
     unless(@itemtag_check) 
       @tag = Tag.find(params[:id])
       @tag.destroy      
