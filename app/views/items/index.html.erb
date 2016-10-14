@@ -1,0 +1,30 @@
+<h1>Listing blog items</h1>
+
+<%= link_to 'New blog item', new_item_path, class: 'btn btn-success' %>
+<div class="form-group">
+    <p>&nbsp;</p>
+</div>
+<div class="form-group">
+  <table class="table table-bordered pagin-table">
+    <thead>
+      <tr>
+        <th>Heading</th>
+        <th>Body</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.heading %></td>
+          <td><%= item.body %></td>
+          <td>
+            <%= link_to 'Show', item_path(item), class: 'btn btn-primary btn' %>
+            <%= link_to 'Edit', edit_item_path(item), class: 'btn btn-info btn' %>
+            <%= link_to 'Destroy', item_path(item), method: :delete, data:{confirm:'Are you sure?'},class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

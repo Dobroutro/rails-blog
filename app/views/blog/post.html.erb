@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">News
+            <small>Lates news</small>
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+
+
+    <div class="col-md-9">
+
+
+      <div class="row">
+
+        <div class="col-md-12 portfolio-item">
+            <a href="#">
+              <img class="img-responsive img-thumbnail" src="<%= @item.image %> " alt="">
+            </a>
+            <span>&nbsp;</span>
+            <p>
+              <a href="#">                  
+                <%= @item.heading %>                  
+              </a>
+            </p>
+            <p>
+              <a href="#">                  
+                <%= @item.body %>                  
+              </a>
+            </p>            
+            <em class="pull-right">
+              <%= @item.created_at.strftime("%m/%d/%Y") %>          
+            </em>              
+        </div>        
+      </div>
+
+    </div>
+
+    <div class="col-md-3">
+      <%= render 'tags' %>
+    </div>
+
+
+</div>
+

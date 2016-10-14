@@ -1,0 +1,15 @@
+<div class="well">
+    <h4>Tags</h4>
+    <div class="row">
+        <div class="col-lg-6">
+            <ul class="list-unstyled">
+              <% @tags.each do |tag| %>
+                <li>
+                  <%= link_to tag.name, blog_tag_path(id:tag.id), class: '' %>               
+                </li>
+              <% end %>
+            </ul>
+        </div>
+
+    </div>
+</div>
