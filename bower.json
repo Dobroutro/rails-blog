@@ -1,0 +1,21 @@
+{
+  "name": "railsBlog",
+  "homepage": "https://github.com/Dobroutro/rails-blog",
+  "authors": [
+    "Georgi Gerasimov <gerasimov.georgi@gmail.com>"
+  ],
+  "description": "rails 4.2.6 test blog",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1"
+  }
+}

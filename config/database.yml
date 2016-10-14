@@ -14,7 +14,7 @@ test:
 development:
    <<: *mysql_adapter
    database: rails_blog_dev
-   username: books_user
+   username: rails
    password: test
    host: localhost
 
