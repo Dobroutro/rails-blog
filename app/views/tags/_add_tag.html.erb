@@ -1,0 +1,23 @@
+<div id="addTagModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Add tag</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for([@items[0], @items[0].tags.build]) do |f| %>
+          <div class="form-group">
+            <%= f.label :name %><br>
+            <%= f.text_field :name,  class: 'form-control' %>
+          </div> 
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save tag</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+</div>

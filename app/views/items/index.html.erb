@@ -1,30 +1,67 @@
-<h1>Listing blog items</h1>
-
-<%= link_to 'New blog item', new_item_path, class: 'btn btn-success' %>
-<div class="form-group">
-    <p>&nbsp;</p>
+<div class="row">
+  <h1 class="pull-left">News list</h1>
+  <%= link_to 'New blog item', new_item_path, class: 'btn btn-success pull-right' %>
 </div>
+
+<% flash.each do |key, value| %>
+  <div class="row">
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">Close</span>
+        </button>   
+        <%=value %>
+    </div>  
+  </div>  
+<% end %>
+
 <div class="form-group">
   <table class="table table-bordered pagin-table">
     <thead>
       <tr>
-        <th>Heading</th>
-        <th>Body</th>
-        <th></th>
+        <th width="25%">Heading</th>
+        <th width="25%">Body</th>
+        <th width="25%">Tags</th>
+        <th width="25%"></th>
       </tr>
     </thead>
     <tbody>
       <% @items.each do |item| %>
-        <tr>
-          <td><%= item.heading %></td>
-          <td><%= item.body %></td>
+        <tr class="row-id-<%=item.id%>">
+          <td><%= truncate(item.heading, :length => 50, :omission => '...') %></td>
+          <td><%= truncate(item.body, :length => 100, :omission => '...')  %></td>
+          <td id="td-actions-id-<%=item.id%>">
+            <button type="button" 
+                    class="btn btn-success js-add-tag" 
+                    data-toggle="modal" 
+                    data-target=".bd-example-modal-sm"
+                    data-item-id="<%=item.id%>">
+              Add tag
+            </button>            
+            <% if item.tags.present? %>
+              <% item.tags.each do |tag| %>
+                <div id="js-tag-id-<%=item.id%>" class="btn btn-success">
+                  <span><%= truncate(tag.name, :length => 10, :omission => '...') %></span>
+                  <span>&nbsp;</span>
+
+                  <button type="button" class="close" aria-label="Delete tag">
+                    <%= link_to item_tag_path(item.id, tag.id), remote: true,  method: :delete, data:{confirm:'Are you sure?'} do %>
+                      <span aria-hidden="true">&times;</span>
+                    <% end %>        
+                  </button>
+                </div>
+              <% end %>
+            <% end %>
+          </td>
           <td>
-            <%= link_to 'Show', item_path(item), class: 'btn btn-primary btn' %>
-            <%= link_to 'Edit', edit_item_path(item), class: 'btn btn-info btn' %>
-            <%= link_to 'Destroy', item_path(item), method: :delete, data:{confirm:'Are you sure?'},class: 'btn btn-danger' %>
+            <%= link_to 'Edit', edit_item_path(item), class: 'btn btn-info' %>
+            <%= link_to 'Delete', item_path(item), remote: true,  method: :delete, data:{confirm:'Are you sure?'},class: 'btn btn-danger' %>                                                  
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 </div>
+
+<%= render :partial => 'tags/add_tag' %>
+<%= render :partial => 'tags/tag_btn' %>

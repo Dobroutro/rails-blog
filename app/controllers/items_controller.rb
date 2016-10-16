@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   http_basic_authenticate_with name: "admin", password: "test", except: []  
 
   def index
-    @items = Item.all.order(id: :desc)
+    @items = Item.includes(:tags).all.order(id: :desc).order("tags.name desc")
   end
     
   def new
@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   end 
 
   def show
-    @item = Item.find(params[:id])
+    redirect_to root_url
   end
 
   def edit
@@ -21,7 +21,8 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to @item
+      flash[:notice] = 'Created!'
+      redirect_to items_path
     else
       render 'new' 
     end   
@@ -30,17 +31,28 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])   
     if @item.update(item_params)
-      redirect_to @item
+      flash[:notice] = 'Updated!'
+      redirect_to items_path
     else
       render 'edit'
     end
   end
 
   def destroy
-    @item = Item.find(params[:id])
-    @item.destroy
- 
-    redirect_to items_path
+    respond_to do |format|  
+      @item = Item.find(params[:id]) 
+      if @item.destroy
+        @tags = Tag.all
+        @tags.each do |tag|
+          unless(tag.items.present?)
+            tag.destroy
+          end
+        end 
+        format.json { render json: @item, status: :ok }
+      else
+        format.json { render json: @item.errors, status: :unprocessable_entity }
+      end
+    end
   end  
 
   private

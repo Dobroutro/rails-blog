@@ -1,19 +1,19 @@
 <%= form_for :item, url: items_path do |f| %>
-  <div class="form-group">
-    <% if @item.errors.any? %>
-      <div id="error_explanation">
-        <h2>
-          <%= pluralize(@item.errors.count, "error") %> prohibited
-          this blog entry from being saved:
-        </h2>
-        <ul>
-          <% @item.errors.full_messages.each do |msg| %>
+  
+  <% if @item.errors.any? %>
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">Close</span>
+        </button>   
+        <% @item.errors.full_messages.each do |msg| %>
+          <ul>
             <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-  </div>
+          </ul>
+        <% end %>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :heading %><br>
     <%= f.text_field :heading,  class: 'form-control' %>
@@ -28,6 +28,6 @@
     <%= f.file_field :image, class: 'form-control'  %>
   </div>
   <div class="form-group">
-    <%= f.submit %>
+    <%= f.submit  'Save', :class => 'btn btn-primary btn' %>
   </div>
 <% end %>

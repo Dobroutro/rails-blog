@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
   has_and_belongs_to_many :tags
 
-  validates :heading, presence: true, length: { minimum: 5 }    
+  validates :heading, presence: true, length: { minimum: 5, maximum: 500 }    
   mount_uploader :image, ImageUploader
   validates_processing_of :image
   validate :image_size_validation
