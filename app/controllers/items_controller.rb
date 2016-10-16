@@ -49,9 +49,9 @@ class ItemsController < ApplicationController
           end
         end 
         format.json { render json: @item, status: :ok }
-      else
-        format.json { render json: @item.errors, status: :unprocessable_entity }
-      end
+      end 
+      
+      format.json { render json: @item.errors, status: :unprocessable_entity }
     end
   end  
 

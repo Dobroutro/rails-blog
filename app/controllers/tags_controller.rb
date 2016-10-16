@@ -28,7 +28,6 @@ class TagsController < ApplicationController
         format.json { render json: @item.tags.errors, status: :unprocessable_entity }
       end
 
-
     end
   end
  
@@ -36,14 +35,17 @@ class TagsController < ApplicationController
     respond_to do |format|   
       @item = Item.find(params[:item_id])
       @itemtag = ItemsTag.where("item_id = ? AND tag_id = ?", params[:item_id], params[:id]).first()    
+
       if(@itemtag.destroy)
         @itemtag_check = ItemsTag.where(tag_id: params[:id]).first()      
         unless(@itemtag_check) 
           @tag = Tag.find(params[:id])
           @tag.destroy      
-        end                 
+        end                
+
         format.json { render json: @itemtag, status: :ok}
       end
+      
       format.json { render json: @item.errors, status: :unprocessable_entity }
     end
   end
