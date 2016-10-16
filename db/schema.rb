@@ -14,26 +14,26 @@
 ActiveRecord::Schema.define(version: 20161013121755) do
 
   create_table "items", force: :cascade do |t|
-    t.string   "heading",    limit: 255
-    t.text     "body",       limit: 65535
-    t.string   "image",      limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "heading"
+    t.text     "body"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "items_tags", force: :cascade do |t|
-    t.integer "item_id", limit: 4
-    t.integer "tag_id",  limit: 4
+    t.integer "item_id"
+    t.integer "tag_id"
   end
 
-  add_index "items_tags", ["item_id", "tag_id"], name: "index_items_tags_on_item_id_and_tag_id", unique: true, using: :btree
+  add_index "items_tags", ["item_id", "tag_id"], name: "index_items_tags_on_item_id_and_tag_id", unique: true
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
 end
