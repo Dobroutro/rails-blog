@@ -48,8 +48,8 @@
     $('#td-actions-id-'+data.item_id).append(template);      
     $('#js-tag-btn-new').attr('id', 'js-tag-id-'+data.tag_id);      
     $('#js-tag-id-'+data.tag_id + ' .js-tag-name-content').html(tag_name);      
-    $('#js-tag-id-'+data.tag_id + ' .js-tag-name-x').attr('action', '/items/'+data.item_id+'/tags/'+data.tag_id);             
-    
+    $('#js-tag-id-'+data.tag_id + ' .js-tag-name-x').attr('href', '/items/'+data.item_id+'/tags/'+data.tag_id);             
+    initItemsActions();
     $('#addTagModal').modal('hide');  
   }
 
