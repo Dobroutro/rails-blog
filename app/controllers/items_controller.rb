@@ -42,15 +42,10 @@ class ItemsController < ApplicationController
     respond_to do |format|  
       @item = Item.find(params[:id]) 
       if @item.destroy
-        @tags = Tag.all
-        @tags.each do |tag|
-          unless(tag.items.present?)
-            tag.destroy
-          end
-        end 
+        check_deleted_tags
         format.json { render json: @item, status: :ok }
       end 
-      
+
       format.json { render json: @item.errors, status: :unprocessable_entity }
     end
   end  
@@ -58,5 +53,14 @@ class ItemsController < ApplicationController
   private
     def item_params
       params.require(:item).permit(:heading, :body, :image, :remove_image)
+    end    
+
+    def check_deleted_tags
+      @tags = Tag.all
+      @tags.each do |tag|
+        unless tag.items.present?
+          tag.destroy
+        end
+      end   
     end    
 end
