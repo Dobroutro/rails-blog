@@ -1,6 +1,16 @@
-# rails-blog
-Rails 4.2.6 test blog application
+# Rails 4.2.6 test blog application
 
-bundle install
+#Install
+    git clone https://github.com/Dobroutro/rails-blog.git {some_folder}
 
-bin/rake db:migrate
+    cd {some_folder}
+
+    bundle install
+
+    set db credentials in config/database.yml
+
+    bin/rake db:migrate
+
+# Login 
+user:admin/test
+
