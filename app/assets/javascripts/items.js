@@ -17,13 +17,18 @@
       $('#new_tag').attr('action','/items/'+$(this).attr('data-item-id')+'/tags');
     });
 
+    setDeleteAction();
+ 
+  }
+
+  function setDeleteAction() {
     $("a[data-remote]").on("ajax:success", function(e, data, status, xhr) {
       if (data.tag_id) {
         $(this).parents(".btn").remove();
       } else {
         $('.row-id-' + data.id).remove();
       }
-    });  
+    });     
   }
 
   function submitCreateTagForm () {
@@ -49,7 +54,9 @@
     $('#js-tag-btn-new').attr('id', 'js-tag-id-'+data.tag_id);      
     $('#js-tag-id-'+data.tag_id + ' .js-tag-name-content').html(tag_name);      
     $('#js-tag-id-'+data.tag_id + ' .js-tag-name-x').attr('href', '/items/'+data.item_id+'/tags/'+data.tag_id);             
-    initItemsActions();
+
+    setDeleteAction();
+
     $('#addTagModal').modal('hide');  
   }
 
